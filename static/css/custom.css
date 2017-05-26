@@ -1,0 +1,13 @@
+ .jumbotron {
+    background-color: #FCB649;
+ }
+
+body {
+    padding-top: 50px; /* Padding for .navbar-fixed-top. Change value if navbar height changes. Remove if using .navbar-static-top. */
+}
+
+section {
+    padding: 70px 0;
+    border-bottom: 1px dotted #ccc
+}
+

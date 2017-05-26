@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="container">
+    <section>
+        <h2>女性乳腺癌健康风险检测</h2>
+
+        <table class="table table-striped" id="check-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>问题</th>
+              <th>选项</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>您的年龄为多少岁?</td>
+              <td>
+                <select class="custom-select" id="t1">
+                    <option selected value="1">选择</option>
+                    <option value="2.7e-2">25-30</option>
+                    <option value="1.16e-1">31-36</option>
+                    <option value="6.43e-1">37-42</option>
+                    <option value="1.29">43-48</option>
+                    <option value="1.56">49-54</option>
+                    <option value="1.97">55-60</option>
+                    <option value="2.22">61-66</option>
+                    <option value="1.64">大于67</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">2</th>
+              <td>您的BMI指数为多少？
+                  <a href="{% url 'breast:tool' %}#bmi-tool">BMI值计算器</a>
+              </td>
+              <td>
+                <select class="custom-select">
+                    <option selected value="1">选择</option>
+                    <option value="9.19e-1">小于18</option>
+                    <option value="7.83e-1">18-20.9</option>
+                    <option value="7.83e-1">21-23.9</option>
+                    <option value="1.05">24-26.9</option>
+                    <option value="1.92">27-29.9</option>
+                    <option value="2.21">大于20</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">3</th>
+              <td>您的臀围为多少厘米？
+                  （一尺约为33厘米）
+              </td>
+              <td>
+                <select class="custom-select">
+                    <option selected value="1">选择</option>
+                    <option value="2.67">小于69</option>
+                    <option value="3.26e-1">70-85</option>
+                    <option value="7.75e-1">86-99</option>
+                    <option value="1.56">100-119</option>
+                    <option value="2.69">120-133</option>
+                    <option value="4.96">大于134</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">4</th>
+              <td>您的怀孕次数为多少？
+              </td>
+              <td>
+                <select class="custom-select">
+                    <option selected value="1">选择</option>
+                    <option value="4.42e-1">0</option>
+                    <option value="4.65e-1">1</option>
+                    <option value="1.13">2</option>
+                    <option value="1.66">3</option>
+                    <option value="1.54">4</option>
+                    <option value="1.95">5</option>
+                    <option value="2.34">大于5</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">5</th>
+              <td>您是进行过母乳喂养？
+              </td>
+              <td>
+                <select class="custom-select">
+                    <option selected value="1">选择</option>
+                    <option value="9.92e-1">是</option>
+                    <option value="1.7">否</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">6</th>
+              <td>您是否有乳房肿块？
+              </td>
+              <td>
+                <select class="custom-select">
+                    <option selected value="1">选择</option>
+                    <option value="5.04">是</option>
+                    <option value="8.45e-1">否</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">7</th>
+              <td>您是否痛经？
+              </td>
+              <td>
+                <select class="custom-select">
+                    <option selected value="1">选择</option>
+                    <option value="1.17">是</option>
+                    <option value="9.61e-1">否</option>
+                </select>
+              </td>
+            </tr>
+
+
+            <tr>
+              <th scope="row">8</th>
+              <td>您的性情是否急躁？
+              </td>
+              <td>
+                <select class="custom-select">
+                    <option selected value="1">选择</option>
+                    <option value="1.22">是</option>
+                    <option value="8.02e-1">一般</option>
+                    <option value="9.61e-1">否</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">9</th>
+              <td>您对您的睡眠是否满意？
+              </td>
+              <td>
+                <select class="custom-select">
+                    <option selected value="1">选择</option>
+                    <option value="7.75e-1">非常满意</option>
+                    <option value="9.57e-1">比较满意</option>
+                    <option value="1.80">不满意</option>
+                    <option value="1.24">非常不满意</option>
+                </select>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <!-- Button trigger modal -->
+        <div class="row">
+            <div class="col-md-12">
+            <p class="font-italic text-info text-md-right">确认填写无误,我要提交</p>
+            <button type="button" class="btn btn-primary float-md-right" data-toggle="modal" data-target="#exampleModal" onclick="calcVal()">提交</button>
+            </div>
+        </div>
+
+    </section>
+    </div>
+
+
+
+    <div class="container">
+    <section id="bmi-tool">
+        <h3>BMI值计算器</h3>
+        <p>BMI指数（即身体质量指数，简称体质指数又称体重，英文为Body Mass Index，简称BMI），是用体重公斤数除以身高米数平方得出的数字，是目前国际上常用的衡量人体胖瘦程度以及是否健康的一个标准。</p>
+        <p>请输入您的身高和体重：</p>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">身高</span>
+                    <input type="text" id="height" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon">cm</span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">体重</span>
+                    <input type="text" id="weight" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon">Kg</span>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-secondary" onclick="bmi()">开始计算</button>
+            </div>
+        </div>
+        <br>
+
+        <h5>您的BMI值为：<span id="bmi-result"></span></h5>
+
+    </section>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">您的检测结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <p>经过我们的模型检测，您患乳腺癌的风险值为<span id="check-result-absolute"></span>。</p>
+              <p>据乳腺癌人群队列调查数据显示，人群中患乳腺癌的平均风险为0.00258，即平均每十万人中就有258人患有乳腺癌。</p>
+              <p>您患乳腺癌的风险值是一般人的<span id="check-result-relative"></span>倍，为<span id="check-result"></span>风险。</p>
+              <p>如果你的患病风险值高于平均水平，或者身体有明显不适，我们建议您立即去医院做进一步检查。</p>
+              <p>若使用本平台检测工具检测并与实践结果发生偏差，本站概不负责，亦不负任何法律责任。</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+{#            <button type="button" class="btn btn-primary">Save changes</button>#}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="/static/js/custom.js"></script>
+
+
+
+{% endblock %}
